@@ -1,7 +1,12 @@
 package com.example.birthdayhelper;
 
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,34 +23,47 @@ import java.util.List;
  * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyContactosFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MyContactosFragmentRecyclerViewAdapter.ViewHolder> {
+public class MyContactosFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MyContactosFragmentRecyclerViewAdapter.ViewHolder>{
 
-    private final List<PlaceholderItem> mValues;
+    private Context context;
 
-    public MyContactosFragmentRecyclerViewAdapter(List<PlaceholderItem> items) {
-        mValues = items;
+    public MyContactosFragmentRecyclerViewAdapter(Context context) {
+        this.context = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         return new ViewHolder(FragmentItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-//        holder.mItem = mValues.get(position);
-//        holder.mIdView.setText(mValues.get(position).id);
-//        holder.mContentView.setText(mValues.get(position).content);
+        final Contacto itemContacto = MainActivity.listaContactos.get(position);
+        holder.foto.setImageBitmap(MainActivity.listaContactos.get(position).getFoto());
+        holder.nombre.setText(MainActivity.listaContactos.get(position).getNombre());
+        holder.telefono.setText(MainActivity.listaContactos.get(position).getTelefono());
+        holder.fechaNacimiento.setText(MainActivity.listaContactos.get(position).getFechaNacimiento());
+        holder.notificacion.setText(MainActivity.listaContactos.get(position).getTipoNotif());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(), VentanaContactos.class);
+                intent.putExtra("itemContacto",itemContacto);
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return MainActivity.listaContactos.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public Contacto item;
 
         public final ImageView foto;
         public final TextView nombre;
@@ -56,7 +74,8 @@ public class MyContactosFragmentRecyclerViewAdapter extends RecyclerView.Adapter
 
         public ViewHolder(FragmentItemBinding binding) {
             super(binding.getRoot());
-            foto = binding.imgContact;
+
+            foto = binding.imgPhoto;
             nombre = binding.txtName;
             telefono = binding.txtPhone;
             fechaNacimiento = binding.txtBirthday;

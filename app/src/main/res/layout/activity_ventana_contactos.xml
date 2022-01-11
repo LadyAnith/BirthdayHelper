@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".FirstFragment">
-
+    tools:context=".VentanaContactos">
     <ImageView
         android:id="@+id/imgFoto"
         android:layout_width="136dp"
@@ -23,38 +21,49 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Nombre:"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="25dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="54dp"
+        android:layout_height="57dp"
         android:layout_marginEnd="4dp"
         android:text="..."
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="54dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.063" />
 
     <CheckBox
         android:id="@+id/checkSms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Enviar SMS?"
-        tools:layout_editor_absoluteX="171dp"
-        tools:layout_editor_absoluteY="101dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.202"
+        app:layout_constraintStart_toEndOf="@+id/imgFoto"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.165" />
 
     <EditText
         android:id="@+id/txtNombre"
-        android:layout_width="161dp"
-        android:layout_height="37dp"
+        android:layout_width="167dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        tools:layout_editor_absoluteX="171dp"
-        tools:layout_editor_absoluteY="54dp" />
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imgFoto"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView3"
@@ -62,17 +71,19 @@
         android:layout_height="wrap_content"
         android:text="Teléfono:"
         app:layout_constraintBottom_toTopOf="@+id/spinnerTlf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFoto"
-        app:layout_constraintVertical_bias="0.647"
-        tools:layout_editor_absoluteX="25dp" />
+        app:layout_constraintVertical_bias="0.551" />
 
     <Spinner
         android:id="@+id/spinnerTlf"
-        android:layout_width="288dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="296dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
@@ -80,33 +91,32 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:text="Fecha de Nacimiento:"
         app:layout_constraintBottom_toTopOf="@+id/txtFecha"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTlf"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.704" />
 
     <EditText
         android:id="@+id/txtFecha"
-        android:layout_width="235dp"
-        android:layout_height="30dp"
+        android:layout_width="240dp"
+        android:layout_height="52dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintVertical_bias="0.499" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="76dp"
         android:text="Mensaje:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
@@ -115,17 +125,27 @@
 
     <EditText
         android:id="@+id/txtMensaje"
-        android:layout_width="309dp"
-        android:layout_height="89dp"
+        android:layout_width="317dp"
+        android:layout_height="131dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.245"
+        app:layout_constraintHorizontal_bias="0.255"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.129" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtMensaje" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

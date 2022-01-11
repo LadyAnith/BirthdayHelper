@@ -1,29 +1,39 @@
 package com.example.birthdayhelper.entity;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Contacto {
+public class Contacto implements Serializable{
 
     private int id;
     private String tipoNotif;
     private String mensaje;
-    private List<String> telefono = new ArrayList<>();
+    private List<String> telefonos = new ArrayList<>();
+    private String telefono;
     private String fechaNacimiento;
     private String nombre;
+    private Bitmap foto;
 
     public Contacto() {
         this.tipoNotif = "N";
         this.mensaje = "Felicidades!!";
     }
 
-    public Contacto(int id, String tipoNotif, String mensaje, List<String> telefono, String fechaNacimiento, String nombre) {
+
+
+    public Contacto(int id, String tipoNotif, String mensaje, String telefono, String fechaNacimiento, String nombre) {
         this.id = id;
         this.tipoNotif = tipoNotif;
         this.mensaje = mensaje;
         this.telefono = telefono;
+        telefonos.add(telefono);
         this.fechaNacimiento = fechaNacimiento;
         this.nombre = nombre;
+
     }
 
     public int getId() {
@@ -50,11 +60,19 @@ public class Contacto {
         this.mensaje = mensaje;
     }
 
-    public List<String> getTelefono() {
+    public List<String> getTelefonos() {
+        return telefonos;
+    }
+
+    public void setTelefonos(List<String> telefonos) {
+        this.telefonos = telefonos;
+    }
+
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(List<String> telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -72,5 +90,26 @@ public class Contacto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Bitmap getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Bitmap foto) {
+        this.foto = foto;
+    }
+
+    @Override
+    public String toString() {
+        return "Contacto{" +
+                "id=" + id +
+                ", tipoNotif='" + tipoNotif + '\'' +
+                ", mensaje='" + mensaje + '\'' +
+                ", telefonos=" + telefonos +
+                ", telefono='" + telefono + '\'' +
+                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
     }
 }

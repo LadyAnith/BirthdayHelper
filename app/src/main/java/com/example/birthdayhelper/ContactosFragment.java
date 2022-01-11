@@ -85,9 +85,22 @@ public class ContactosFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_item_list,
-                container, false);
+
+        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        // Set the adapter
+        if (view instanceof RecyclerView) {
+            Context context = view.getContext();
+            RecyclerView recyclerView = (RecyclerView) view;
+            if (mColumnCount <= 1) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            }
+            recyclerView.setAdapter(new MyContactosFragmentRecyclerViewAdapter(getContext()));
+        }
+        return view;
     }
+
 
 
     @NonNull
