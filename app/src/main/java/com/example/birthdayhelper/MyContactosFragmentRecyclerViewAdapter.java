@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,13 +44,18 @@ public class MyContactosFragmentRecyclerViewAdapter extends RecyclerView.Adapter
         holder.nombre.setText(MainActivity.listaContactos.get(position).getNombre());
         holder.telefono.setText(MainActivity.listaContactos.get(position).getTelefono());
         holder.fechaNacimiento.setText(MainActivity.listaContactos.get(position).getFechaNacimiento());
-        holder.notificacion.setText(MainActivity.listaContactos.get(position).getTipoNotif());
+        if(MainActivity.listaContactos.get(position).getTipoNotif().equals("N")){
+            holder.notificacion.setText("Aviso:Solo Notificación");
+        } else{
+            holder.notificacion.setText("Aviso:Enviar SMS");
+        }
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(holder.itemView.getContext(), VentanaContactos.class);
-                intent.putExtra("itemContacto",itemContacto);
+                intent.putExtra("itemContacto", (Parcelable) itemContacto);
                 holder.itemView.getContext().startActivity(intent);
             }
         });

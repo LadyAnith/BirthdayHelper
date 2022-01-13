@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnEditar"
         android:layout_width="54dp"
         android:layout_height="57dp"
         android:layout_marginEnd="4dp"
@@ -60,7 +60,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/btnEditar"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imgFoto"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -79,11 +79,11 @@
 
     <Spinner
         android:id="@+id/spinnerTlf"
-        android:layout_width="296dp"
-        android:layout_height="44dp"
+        android:layout_width="344dp"
+        android:layout_height="38dp"
         android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 

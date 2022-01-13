@@ -2,12 +2,14 @@ package com.example.birthdayhelper.entity;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Contacto implements Serializable{
+public class Contacto implements Serializable, Parcelable {
 
     private int id;
     private String tipoNotif;
@@ -35,6 +37,29 @@ public class Contacto implements Serializable{
         this.nombre = nombre;
 
     }
+
+    protected Contacto(Parcel in) {
+        id = in.readInt();
+        tipoNotif = in.readString();
+        mensaje = in.readString();
+        telefonos = in.createStringArrayList();
+        telefono = in.readString();
+        fechaNacimiento = in.readString();
+        nombre = in.readString();
+        foto = in.readParcelable(Bitmap.class.getClassLoader());
+    }
+
+    public static final Creator<Contacto> CREATOR = new Creator<Contacto>() {
+        @Override
+        public Contacto createFromParcel(Parcel in) {
+            return new Contacto(in);
+        }
+
+        @Override
+        public Contacto[] newArray(int size) {
+            return new Contacto[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -111,5 +136,22 @@ public class Contacto implements Serializable{
                 ", fechaNacimiento='" + fechaNacimiento + '\'' +
                 ", nombre='" + nombre + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(tipoNotif);
+        dest.writeString(mensaje);
+        dest.writeStringList(telefonos);
+        dest.writeString(telefono);
+        dest.writeString(fechaNacimiento);
+        dest.writeString(nombre);
+        dest.writeParcelable(foto, flags);
     }
 }
