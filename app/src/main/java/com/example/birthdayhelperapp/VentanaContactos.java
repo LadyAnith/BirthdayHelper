@@ -1,4 +1,4 @@
-package com.example.birthdayhelper;
+package com.example.birthdayhelperapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,8 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.birthdayhelperapp.entity.Contacto;
+import com.example.birthdayhelperapp.repository.MisCumplesRepository;
 
-import com.example.birthdayhelper.entity.Contacto;
 
 public class VentanaContactos extends AppCompatActivity {
     private ImageView imagePhoto;
@@ -26,6 +27,8 @@ public class VentanaContactos extends AppCompatActivity {
     private EditText textMensaje;
     private Contacto detallesContacto;
     private Button btnEditar;
+    private Button btnGuardar;
+    private MisCumplesRepository misCumplesRepository = new MisCumplesRepository(this );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +46,20 @@ public class VentanaContactos extends AppCompatActivity {
         textDate= findViewById(R.id.txtFecha);
         textMensaje= findViewById(R.id.txtMensaje);
         btnEditar = findViewById(R.id.btnEditar);
+        btnGuardar = findViewById(R.id.btnGuardar);
     }
     private void initValues(){
-        detallesContacto = (Contacto) getIntent().getExtras().getSerializable("itemContacto");
+        String keyMap = (String) getIntent().getExtras().getSerializable("itemContacto");
+        detallesContacto = MainActivity.listaContactos.get(keyMap) ;
         imagePhoto.setImageBitmap(detallesContacto.getFoto());
         textName.setText(detallesContacto.getNombre());
         textDate.setText(detallesContacto.getFechaNacimiento());
         textMensaje.setText(detallesContacto.getMensaje());
         textMensaje.setEnabled(false);
+        if(("S").equals(detallesContacto.getTipoNotif())){
+            checkSms.setChecked(true);
+            textMensaje.setEnabled(true);
+        }
         checkSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +79,28 @@ public class VentanaContactos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openContactById(detallesContacto.getId());
+            }
+        });
+
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                detallesContacto.setNombre(textName.getText().toString());
+                detallesContacto.setFechaNacimiento(textDate.getText().toString());
+                detallesContacto.setMensaje(textMensaje.getText().toString());
+                detallesContacto.setTelefono(spinnerPhone.getSelectedItem().toString());
+
+                detallesContacto.setTipoNotif("N");
+                if(checkSms.isChecked()){
+                    detallesContacto.setTipoNotif("S");
+                }
+
+                misCumplesRepository.insertOrUpdate(detallesContacto);
+
+                Intent i = new Intent(VentanaContactos.this, ContactsActivity.class);
+                startActivity(i);
+
             }
         });
     }
